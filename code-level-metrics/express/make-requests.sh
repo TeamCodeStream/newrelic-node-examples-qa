@@ -8,5 +8,6 @@ while true; do
   curl --silent http://localhost:3000/chained
   curl --silent http://localhost:3000/schedule-job
   curl --silent http://localhost:3000/run-job
+  curl --silent http://localhost:3000/error
   sleep 10
 done

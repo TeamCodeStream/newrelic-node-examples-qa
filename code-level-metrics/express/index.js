@@ -4,12 +4,18 @@
  */
 
 'use strict'
-
 const express = require('express')
 
 const { scheduleJob, runJob } = require('./util')
 
 const app = express()
+
+const holdUp = (req, res, next) => {
+  setTimeout(next, 50);
+}
+
+app.use(holdUp)
+
 const { PORT = '3000', HOST = 'localhost' } = process.env
 
 app.listen(PORT, HOST, function () {
@@ -19,7 +25,17 @@ app.listen(PORT, HOST, function () {
 })
 
 app.get('/named-mw', function namedMiddlweare(_req, res) {
+  if (Date.now() % 2 === 0) {
+    throw new Error("INVALID_MULTIVERSO");
+  }
   res.send('This is a named middleware handler')
+})
+
+app.get('/error', function error(_req, res) {
+  // if (Date.now() %2 === 0) {
+  throw new Error("INVALID_UNIVERSE");
+  // }
+  // res.send('NO error this time')
 })
 
 app.get('/anon', function (_req, res) {
