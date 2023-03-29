@@ -13,13 +13,16 @@ const userData = [
     }
 ]
 
-module.exports =  {
-    collectStreetAddresses() {
-        const addresses = userData.map(data => data.address.street)
-        return addresses
-    },
-    collectZipCodes() {
-        const zipCodes = userData.map(data => data.address.zip)
-        return zipCodes
-    }
+function collectStreetAddresses() {
+    const addresses = userData.map(data => data.address.street)
+    return addresses
+}
+
+function collectZipCodes() {
+    const zipCodes = userData.map(data => data.address.zip)
+    return zipCodes
+}
+
+module.exports = {
+    collectStreetAddresses, collectZipCodes
 }
