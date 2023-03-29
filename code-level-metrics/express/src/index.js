@@ -8,7 +8,7 @@ const express = require('express')
 
 const { scheduleJob, runJob } = require('./util')
 
-const { collectStreetAddresses, collectZipCodes } = require('./dataSource')
+const { collectStreetAddresses, collectZipCodes, collectPhoneNumbers } = require('./dataSource')
 
 const app = express()
 
@@ -31,7 +31,7 @@ app.get('/named-mw', function namedMiddlweare(_req, res) {
 })
 
 app.get('/data', function namedMiddlweare(_req, res) {
-  const data = collectZipCodes();
+  const data = collectPhoneNumbers();
   res.send(data);
 })
 

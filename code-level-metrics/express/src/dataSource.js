@@ -5,6 +5,10 @@ const userData = [
         "address": {
             "street": "123 W. Here",
             "zip": "11111"
+        },
+        "phone": {
+            countryCode: "3",
+            number: "5555555555"
         }
     },
     {
@@ -23,6 +27,11 @@ function collectZipCodes() {
     return zipCodes
 }
 
+function collectPhoneNumbers() {
+    const phones = userData.map(data => `${data.phone.countryCode} ${data.phone.number}`)
+    return phones
+}
+
 module.exports = {
-    collectStreetAddresses, collectZipCodes
+    collectStreetAddresses, collectZipCodes, collectPhoneNumbers
 }
