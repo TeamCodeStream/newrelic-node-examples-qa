@@ -8,6 +8,8 @@ const express = require('express')
 
 const { scheduleJob, runJob } = require('./util')
 
+const { collectStreetAddresses, collectZipCodes } = require('./dataSource')
+
 const app = express()
 
 const holdUp = (req, res, next) => {
@@ -25,17 +27,12 @@ app.listen(PORT, HOST, function () {
 })
 
 app.get('/named-mw', function namedMiddlweare(_req, res) {
-  if (Date.now() % 2 === 0) {
-    throw new Error("INVALID_MULTIVERSO");
-  }
   res.send('This is a named middleware handler')
 })
 
-app.get('/error', function error(_req, res) {
-  // if (Date.now() %2 === 0) {
-  throw new Error("INVALID_UNIVERSE");
-  // }
-  // res.send('NO error this time')
+app.get('/data', function namedMiddlweare(_req, res) {
+  const data = collectZipCodes();
+  res.send(data);
 })
 
 app.get('/anon', function (_req, res) {

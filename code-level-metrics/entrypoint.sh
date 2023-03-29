@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Starting server"
-node -r ./instrumentation index.js &
+node -r ./src/instrumentation src/index.js &
 
 echo "Make requests"
 # make requests 
