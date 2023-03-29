@@ -31,7 +31,7 @@ app.get('/named-mw', function namedMiddlweare(_req, res) {
 })
 
 app.get('/data', function namedMiddlweare(_req, res) {
-  const data = collectPhoneNumbers();
+  const data = collectStreetAddresses();
   res.send(data);
 })
 
@@ -58,3 +58,10 @@ app.get('/chained', function mw1(_req, _res, next) { next() }, function(_req, _r
 
 app.get('/schedule-job', scheduleJob)
 app.get('/run-job', runJob)
+
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.status(500).send(err.message)
+});
