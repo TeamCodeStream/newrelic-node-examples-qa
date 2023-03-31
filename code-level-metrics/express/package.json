@@ -13,6 +13,7 @@
     "newrelic": "^9.14.1"
   },
   "devDependencies": {
-    "@newrelic/eslint-config": "^0.3.0"
+    "@newrelic/eslint-config": "^0.3.0",
+    "prettier": "2.8.7"
   }
 }

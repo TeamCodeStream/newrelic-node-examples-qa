@@ -8,12 +8,12 @@ const express = require('express')
 
 const { scheduleJob, runJob } = require('./util')
 
-const { collectStreetAddresses, collectZipCodes, collectPhoneNumbers } = require('./dataSource')
+const { collectStreetAddresses } = require('./dataSource')
 
 const app = express()
 
 const holdUp = (req, res, next) => {
-  setTimeout(next, 50);
+  setTimeout(next, 50)
 }
 
 app.use(holdUp)
@@ -31,8 +31,8 @@ app.get('/named-mw', function namedMiddlweare(_req, res) {
 })
 
 app.get('/data', function namedMiddlweare(_req, res) {
-  const data = collectStreetAddresses();
-  res.send(data);
+  const data = collectStreetAddresses()
+  res.send(data)
 })
 
 app.get('/anon', function (_req, res) {
@@ -52,7 +52,20 @@ const handler = function (_req, res) {
 }
 
 // eslint-disable-next-line
-app.get('/chained', function mw1(_req, _res, next) { next() }, function(_req, _res, next) { next() }, (_req, _res, next) => { next() }, mw4, handler)
+app.get(
+  '/chained',
+  function mw1(_req, _res, next) {
+    next()
+  },
+  function (_req, _res, next) {
+    next()
+  },
+  (_req, _res, next) => {
+    next()
+  },
+  mw4,
+  handler
+)
 // The above is deliberately ugly and in one line, with named,
 // anonymous, and arrow functions all in one big mess.
 
@@ -62,6 +75,6 @@ app.get('/run-job', runJob)
 app.use(function onError(err, req, res, next) {
   // The error id is attached to `res.sentry` to be returned
   // and optionally displayed to the user for support.
-  res.statusCode = 500;
+  res.statusCode = 500
   res.status(500).send(err.message)
-});
+})
