@@ -2,7 +2,7 @@
   "name": "clm-express",
   "version": "1.0.0",
   "description": "Example application used to verify Code Level Metrics integration",
-  "main": "src/index.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

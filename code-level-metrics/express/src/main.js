@@ -6,13 +6,14 @@
 'use strict'
 const express = require('express')
 
-const { scheduleJob, runJob } = require('./util')
+const userRoutes= require('./routes/users')
 
-const { collectStreetAddresses } = require('./dataSource')
+const { scheduleJob, runJob } = require('./util')
 
 const app = express()
 
 const holdUp = (req, res, next) => {
+  console.log("Adding delay...")
   setTimeout(next, 50)
 }
 
@@ -30,11 +31,6 @@ app.get('/named-mw', function namedMiddlweare(_req, res) {
   res.send('This is a named middleware handler')
 })
 
-app.get('/data', function namedMiddlweare(_req, res) {
-  const data = collectStreetAddresses()
-  res.send(data)
-})
-
 app.get('/anon', function (_req, res) {
   res.send('anonymous mw handler')
 })
@@ -42,6 +38,8 @@ app.get('/anon', function (_req, res) {
 app.get('/arrow', (_req, res) => {
   res.send('arrow fn mw handler')
 })
+
+app.use('/', userRoutes)
 
 function mw4(_req, _res, next) {
   next()
