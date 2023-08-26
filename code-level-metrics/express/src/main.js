@@ -7,13 +7,14 @@
 const express = require('express')
 
 const userRoutes= require('./routes/users')
+const cartRoutes= require('./routes/cart')
 
 const { scheduleJob, runJob } = require('./util')
 
 const app = express()
 
 const holdUp = (req, res, next) => {
-  console.log("Adding delay...")
+  // console.log("Adding delay...")
   setTimeout(next, 50)
 }
 
@@ -40,6 +41,7 @@ app.get('/arrow', (_req, res) => {
 })
 
 app.use('/', userRoutes)
+app.use('/', cartRoutes)
 
 function mw4(_req, _res, next) {
   next()

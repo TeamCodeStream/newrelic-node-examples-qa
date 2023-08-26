@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Starting request loop"
+echo "Starting request loop..."
 
 while true; do
 #  curl --silent http://localhost:3000/named-mw
@@ -13,6 +13,8 @@ while true; do
 #  curl --silent http://localhost:3000/schedule-job
 #  sleep 1
 #  curl --silent http://localhost:3000/run-job
+  sleep 5
+  curl --silent http://localhost:3000/cart
   sleep 5
   curl --silent http://localhost:3000/users
   sleep 5
